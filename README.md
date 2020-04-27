@@ -14,5 +14,5 @@ http://www.ntop.org/products/traffic-analysis/ntop/
 
 ### Command Line
  ```
-docker run --net=host -t -p 3000:3000 vostronet/ntopng <ntopng arguments>
+docker run --net=host -t -p 3000:3000 vostro/ntopng <ntopng arguments>
  ```
