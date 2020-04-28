@@ -1,9 +1,9 @@
 FROM debian:10-slim
+
+COPY ./sources.list /etc/apt/
+
 RUN apt update && \
     apt -y -q install wget libcap2-bin && \
-    wget https://github.com/maxmind/geoipupdate/releases/download/v4.3.0/geoipupdate_4.3.0_linux_amd64.deb && \
-    apt -y -q install ./geoipupdate_4.3.0_linux_amd64.deb && \
-    rm -f ./geoipupdate_4.3.0_linux_amd64.deb &&\
     wget http://apt.ntop.org/buster/all/apt-ntop.deb && \
     apt -y -q install ./apt-ntop.deb && \
     rm -f ./apt-ntop.deb &&\
