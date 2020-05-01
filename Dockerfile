@@ -1,6 +1,6 @@
 FROM debian:10-slim
 
-COPY ./sources.list /etc/apt/
+COPY ./root /
 
 RUN apt update && \
     apt -y -q install wget libcap2-bin && \
@@ -10,10 +10,12 @@ RUN apt update && \
     apt-get update && \
     apt -y -q install ntopng ntopng-data tzdata && \
     apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    setcap cap_net_raw=pe /usr/bin/ntopng
+    setcap cap_net_raw=pe /usr/bin/ntopng && \
+    chmod +x /entrypoint.sh
 
-USER ntopng
+# USER ntopng - ntop will auto switch, need root for geoipupdate
 
 EXPOSE 3000
 
-CMD ["ntopng"]
+
+CMD ["/entrypoint.sh"]

@@ -13,6 +13,13 @@ http://www.ntop.org/products/traffic-analysis/ntop/
  - 3000/TCP
 
 ### Command Line
+
+Maxmind env variables are optional, only if you want geolocation to work in ntopng
+
  ```
-docker run -d --restart=unless-stopped -p 3000:3000 --link redis:redis vostro/ntopng <ntopng arguments>
+docker run -d --restart=unless-stopped -p 3000:3000 \
+  -e MAXMIND_ACCOUNT_ID=1234
+  -e MAXMIND_LICENSE_KEY=1234
+  -e MAXMIND_EDITIONS=GeoLite2-ASN GeoLite2-City GeoLite2-Country
+  --link redis:redis vostro/ntopng /entrypoint.sh <ntopng arguments>
  ```
